@@ -3,23 +3,34 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>{{ with .Site.Params.portfolio.title }}{{.}}{{end}}</h2>
+                <h2>{{ with .Site.Params.konzept.title }}{{.}}{{end}}</h2>
                 <hr class="star-primary">
             </div>
         </div>
-        <div class="row">
-            {{ range $.Site.Data.projects }}
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal{{ .modalID }}" class="portfolio-link" data-toggle="modal">
-                    <div class="caption">
-                        <div class="caption-content">
-                            <i class="fa fa-search-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/{{ .img }}" class="img-responsive">
-                </a>
-            </div>
-            {{ end }}
+{{ if isset .Site.Params.konzept "video" }}
+        <div class="video">
+        <iframe width="560" height="315" src="{{ with .Site.Params.konzept.video }}{{.}}{{ end }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+{{ end }}
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-2">
+                <div class="konzept-title">
+                    <h3>{{ with $.Site.Data.konzept.haendler.title }}{{ . | markdownify }}{{ end }}</h3>
+                </div>
+                <p>{{ with $.Site.Data.konzept.haendler.description }}{{ . | markdownify }}{{ end }}</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="konzept-title">
+                    <h3>{{ with $.Site.Data.konzept.kunden.title }}{{ . | markdownify }}{{ end }}</h3>
+                </div>
+                <p>{{ with $.Site.Data.konzept.kunden.description }}{{ . | markdownify }}{{ end }}</p>
+            </div>
+        </div>
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+            <a href="{{ with .Site.Params.konzept.button.link }}{{.}}{{ end }}" class="btn btn-lg btn-outline">
+                <i class="fa fa-{{ with .Site.Params.konzept.button.icon }}{{.}}{{end}}"></i> {{ with .Site.Params.konzept.button.text }}{{ . }}{{ end }}
+            </a>
+        </div>
+
     </div>
 </section>
